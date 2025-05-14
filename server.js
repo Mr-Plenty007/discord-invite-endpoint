@@ -18,7 +18,8 @@ app.get("/latest-invite", (req, res) => {
   }
 });
 
-app.post("/update-invite", (req, res) => {
+app.post("/update-invite", (req, res) => {  
+  console.log('Incoming Invite Payload:', req.body);
   const { invite } = req.body;
   if (!invite) return res.status(400).send("Missing invite");
   fs.writeFileSync("invite.txt", invite);
