@@ -19,18 +19,19 @@ app.get("/latest-invite", (req, res) => {
 });
 
 app.post("/update-invite", (req, res) => {
-  console.log('Incoming Invite Payload:', req.body); // Logs full payload
+  console.log("🔥 POST request received at /update-invite");
 
+  console.log("📦 Payload Body:", req.body); // This line helps us debug
   const { invite } = req.body;
+
   if (!invite) {
     console.error("❌ Invite is missing or malformed.");
     return res.status(400).send("Missing invite");
   }
 
-  console.log(`✅ Writing invite: ${invite}`);
   fs.writeFileSync("invite.txt", invite);
+  console.log("✅ Invite written:", invite);
   res.send("Invite updated");
 });
-
 
 app.listen(PORT, () => console.log(`Running on port ${PORT}`));
